@@ -1,0 +1,17 @@
+# Core bot
+aiogram==2.25.2
+aiohttp==3.8.6
+aiofiles==23.2.1
+
+# Database
+psycopg2-binary==2.9.9
+asyncpg==0.29.0
+
+# Redis (cache, FSM storage)
+redis==5.0.8
+
+# Environment variables
+environs==9.5.0
+
+# Utils
+python-dotenv==1.0.1
