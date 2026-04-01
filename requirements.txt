@@ -11,7 +11,7 @@ asyncpg==0.29.0
 redis==5.0.8
 
 # Environment variables
-environs==9.5.0
+environs==11.2.1
 
 # Utils
 python-dotenv==1.0.1
