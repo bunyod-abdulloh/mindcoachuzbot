@@ -1,11 +1,11 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters import CommandStart, Command
+from magic_filter import F
+
 from keyboards.default.user_buttons import main_dkb
 from keyboards.inline.user_ibuttons import user_main_ikb, gender_ikb
 from loader import dp, udb
-from magic_filter import F
-from services.error_service import notify_exception_to_admin
 from states.user import UserAnketa
 
 
@@ -74,4 +74,11 @@ async def handle_main_page(message: types.Message, state: FSMContext):
     await state.finish()
     await message.answer(
         text=message.text, reply_markup=user_main_ikb()
+    )
+
+
+@dp.message_handler(Command("id"), state="*")
+async def handle_return_tg_id(message: types.Message, state: FSMContext):
+    await message.answer(
+        text=f"Sizning id raqamingiz:\n\n<code>{message.from_user.id}</code>"
     )
