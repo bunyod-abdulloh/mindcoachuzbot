@@ -1,5 +1,6 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext
+from aiogram.utils.exceptions import MessageNotModified
 
 from keyboards.inline.admin_ibuttons import are_you_sure_markup, select_treatments_ikb
 from keyboards.inline.callback_datas import check_appointment_cb, select_treatments_cb
@@ -16,7 +17,10 @@ async def handle_check_consultation(call: types.CallbackQuery, state: FSMContext
     await state.update_data(
         patient_id=patient_id, appointment_id=appointment_id
     )
-
+    try:
+        await call.message.edit_reply_markup(reply_markup=None)
+    except MessageNotModified:
+        pass
     await call.message.answer(
         text="Rad etilish sababini kiriting"
     )
@@ -70,7 +74,10 @@ async def handle_check_appointment(call: types.CallbackQuery, state: FSMContext,
     await state.finish()
     patient_id = callback_data.get("patient", None)
     appointment_id = callback_data.get("appointment", None)
-
+    try:
+        await call.message.edit_reply_markup(reply_markup=None)
+    except MessageNotModified:
+        pass
     await call.message.answer(
         text="Davolanish oldin/keyinligini tanlang",
         reply_markup=select_treatments_ikb(
