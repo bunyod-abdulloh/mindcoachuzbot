@@ -96,11 +96,17 @@ async def handle_save_treatment_before(call: types.CallbackQuery, callback_data:
 
     out_date = appointment_date.strftime("%H:%M | %d.%m.%Y")
 
-    await bot.send_message(
-        chat_id=patient_telegram,
-        text=f"Konsultasiya uchun qabul tasdiqlandi!\n\n"
-             f"Sana: {out_date}\n"
-             f"Shifokor: Dr.Gavhar Darvish\n\n"
-             f"Qabulga kelishdan oldin testlarni ishlashni unutmang!",
-        reply_markup=tests_page_ikb()
-    )
+    try:
+        await bot.send_message(
+            chat_id=patient_telegram,
+            text=f"Konsultasiya uchun qabul tasdiqlandi!\n\n"
+                 f"Sana: {out_date}\n"
+                 f"Shifokor: Dr.Gavhar Darvish\n\n"
+                 f"Qabulga kelishdan oldin testlarni ishlashni unutmang!",
+            reply_markup=tests_page_ikb()
+        )
+        msg = "Xabar foydalanuvchiga yuborildi!"
+    except Exception:
+        msg = "Xabar foydalanuvchiga yuborilmadi!"
+
+    await call.message.edit_text(text=msg)

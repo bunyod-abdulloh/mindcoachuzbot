@@ -129,7 +129,9 @@ class AdditionalDB:
     async def set_appointment(self, treatment_stage, appointment_id):
         sql = """
             UPDATE clinic_appointment
-            SET treatment_stage = $1
+            SET treatment_stage = $1,
+                display_name = 'Konsultasiya | Gavhar Darvish | ' 
+                               || TO_CHAR(appointment_date, 'DD.MM.YYYY')
             WHERE id = $2
             RETURNING appointment_date AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Tashkent'
         """
