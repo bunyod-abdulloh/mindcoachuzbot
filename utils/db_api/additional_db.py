@@ -112,12 +112,16 @@ class AdditionalDB:
 
     async def get_patient_treatment_stage(self, patient_id):
         sql = """
-                SELECT 
+            SELECT 
                 TO_CHAR(appointment_date, 'HH24:MI | DD.MM.YYYY') AS appointment_date, 
-                CASE treatment_stage WHEN 'before' THEN 'Oldin' 
-                WHEN 'after' THEN 'Keyin' END AS treatment_stage FROM clinic_appointment 
-                WHERE patient_id = $1
-                """
+                CASE treatment_stage 
+                    WHEN 'before' THEN 'Oldin' 
+                    WHEN 'after' THEN 'Keyin' 
+                    ELSE 'Birinchi qabul' 
+                END AS treatment_stage 
+            FROM clinic_appointment 
+            WHERE patient_id = $1
+        """
         return await self.db.execute(sql, patient_id, fetch=True)
 
     async def get_appointment_datas(self):
