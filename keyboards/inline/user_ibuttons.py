@@ -110,3 +110,18 @@ def tests_page_ikb():
     )
     )
     return kb
+
+
+def check_user_data_ikb():
+    kb = InlineKeyboardMarkup()
+    kb.add(
+        InlineKeyboardButton(
+            text="Qayta kiritish", callback_data="user_re-enter_data", style="danger"
+        )
+    )
+    kb.add(
+        InlineKeyboardButton(
+            text="Tasdiqlash", callback_data="user_check_data", style="success"
+        )
+    )
+    return kb

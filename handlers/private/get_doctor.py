@@ -3,11 +3,12 @@ from zoneinfo import ZoneInfo
 
 from aiogram import types
 from aiogram.dispatcher import FSMContext
+from magic_filter import F
+
 from data.config import ADMINS
 from keyboards.inline.admin_ibuttons import check_patient_datas_ikbs
 from keyboards.inline.consultation_ikbs import create_free_time_keyboard
 from loader import dp, adldb, bot, udb
-from magic_filter import F
 from services.consultation import show_consultation_dates_menu
 from services.texts import week_days, patient_dict
 from states.user import UserAnketa
@@ -160,18 +161,19 @@ async def handle_consultation_chek(message: types.Message, state: FSMContext):
         )
 
         # Foydalanuvchiga tasdiqlash xabari
+        send_check = "Qabul tasdiqlanganidan so'ng testlarni ishlashni unutmang!"
+
         if len(data) == 4:
             await message.answer(
-                "Qabulga yozildingiz! Qabulingiz haqidagi xabar adminga yuborildi.\n\n"
-                "Kiritgan ma'lumotlaringizda xatolik bo'lsa, admin Siz bilan bog'lanadi.\n"
-                "Tasdiqdan so‘ng testlarni ishlashni unutmang."
+                f"Qabulga yozildingiz! Qabulingiz haqidagi xabar adminga yuborildi.\n\n"
+                f"Kiritgan ma'lumotlaringizda xatolik bo'lsa, admin Siz bilan bog'lanadi.\n\n"
+                f"{send_check}"
             )
         else:
             await message.answer_photo(
                 photo=photo_id,
                 caption=f"Ma'lumotlaringiz qabul qilindi!\n\n{text}"
-                        f"Barchasi to'g'ri bo'lsa <b>Tasdiqlash</b>, aks holda <b>Qayta kiritish</b> tugmasini bosing.",
-                reply_markup=None
+                        f"{send_check}"
             )
 
         # Adminga xabar yuborish
