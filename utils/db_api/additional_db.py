@@ -110,12 +110,15 @@ class AdditionalDB:
                  RETURNING id"""
         return await self.db.execute(sql, patient_id, consultation_duration, age_group, appointment_date, fetchval=True)
 
-    async def get_patient_appointment_date(self, telegram_id):
+    async def get_patient_treatment_stage(self, patient_id):
         sql = """
-                    SELECT a.appointment_date, a.consultation_duration, p.name FROM clinic_appointment a 
-                    JOIN clinic_patient p ON a.patient_id = p.id WHERE p.tg_id = $1
-                    """
-        return await self.db.execute(sql, telegram_id, fetchrow=True)
+                SELECT 
+                TO_CHAR(appointment_date AT TIME ZONE 'Asia/Tashkent', 'HH24:MI | DD.MM.YYYY') AS appointment_date, 
+                CASE treatment_stage WHEN 'before' THEN 'Oldin' 
+                WHEN 'after' THEN 'Keyin' END AS treatment_stage FROM clinic_appointment 
+                WHERE patient_id = $1
+                """
+        return await self.db.execute(sql, patient_id, fetchrow=True)
 
     async def get_appointment_datas(self):
         sql = """

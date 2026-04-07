@@ -144,3 +144,16 @@ async def handle_tests_main(event: types.Message | types.CallbackQuery, state: F
 
 
 users_data = {}
+
+def split_text(text: str, max_len: int = 3500) -> list[str]:
+    chunks = []
+    current = ""
+    for line in text.split("\n"):
+        if len(current) + len(line) + 1 > max_len:
+            chunks.append(current)
+            current = line
+        else:
+            current += ("\n" if current else "") + line
+    if current:
+        chunks.append(current)
+    return chunks

@@ -6,6 +6,7 @@ from keyboards.inline.admin_ibuttons import are_you_sure_markup, select_treatmen
 from keyboards.inline.callback_datas import check_appointment_cb, select_treatments_cb
 from keyboards.inline.user_ibuttons import tests_page_ikb
 from loader import dp, adldb, bot
+from services.helper_functions import split_text
 from states.admin import AdminStates
 
 
@@ -78,8 +79,22 @@ async def handle_check_appointment(call: types.CallbackQuery, state: FSMContext,
         await call.message.edit_reply_markup(reply_markup=None)
     except MessageNotModified:
         pass
+
+    check_treatment_stage = await adldb.get_patient_treatment_stage(patient_id=int(patient_id))
+
+    stages_str = ""
+    for n in check_treatment_stage:
+        stages_str += f"{n['appointment_date']} / {n['treatment_stage']}\n"
+
+    chunks = split_text(stages_str)
+
+    # Oxirgi bo'lakdan boshqa hammasini oddiy xabar sifatida yuboramiz
+    for chunk in chunks[:-1]:
+        await call.message.answer(text=chunk)
+
+    # Oxirgi bo'lakka inline keyboard biriktiramiz
     await call.message.answer(
-        text="Davolanish oldin/keyinligini tanlang",
+        text=f"Davolanish oldin/keyinligini tanlang\n\n{chunks[-1]}",
         reply_markup=select_treatments_ikb(
             appointment_id=appointment_id, patient_id=patient_id)
     )
