@@ -118,7 +118,7 @@ class AdditionalDB:
                 WHEN 'after' THEN 'Keyin' END AS treatment_stage FROM clinic_appointment 
                 WHERE patient_id = $1
                 """
-        return await self.db.execute(sql, patient_id, fetchrow=True)
+        return await self.db.execute(sql, patient_id, fetch=True)
 
     async def get_appointment_datas(self):
         sql = """
