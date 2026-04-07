@@ -113,7 +113,7 @@ class AdditionalDB:
     async def get_patient_treatment_stage(self, patient_id):
         sql = """
             SELECT 
-                TO_CHAR(appointment_date AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Tashkent', 'HH24:MI | DD.MM.YYYY') AS appointment_date 
+                TO_CHAR(appointment_date AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Tashkent', 'HH24:MI | DD.MM.YYYY') AS appointment_date,  
                 CASE treatment_stage 
                     WHEN 'before' THEN 'Oldin' 
                     WHEN 'after' THEN 'Keyin' 
