@@ -80,7 +80,8 @@ async def handle_check_appointment(call: types.CallbackQuery, state: FSMContext,
     except MessageNotModified:
         pass
 
-    check_treatment_stage = await adldb.get_patient_treatment_stage(patient_id=int(patient_id))
+    check_treatment_stage = await adldb.get_patient_treatment_stage(patient_id=int(patient_id),
+                                                                    appointment_id = int(appointment_id))
 
     stages_str = ""
     for n in check_treatment_stage:

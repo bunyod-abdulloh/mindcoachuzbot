@@ -110,7 +110,7 @@ class AdditionalDB:
                  RETURNING id"""
         return await self.db.execute(sql, patient_id, consultation_duration, age_group, appointment_date, fetchval=True)
 
-    async def get_patient_treatment_stage(self, patient_id):
+    async def get_patient_treatment_stage(self, patient_id, appointment_id):
         sql = """
             SELECT 
                 TO_CHAR(appointment_date AT TIME ZONE 'UTC' AT TIME ZONE 'Asia/Tashkent', 'HH24:MI | DD.MM.YYYY') AS appointment_date,  
@@ -120,9 +120,9 @@ class AdditionalDB:
                     ELSE 'Birinchi qabul' 
                 END AS treatment_stage 
             FROM clinic_appointment 
-            WHERE patient_id = $1
+            WHERE patient_id = $1 AND id != $2
         """
-        return await self.db.execute(sql, patient_id, fetch=True)
+        return await self.db.execute(sql, patient_id, appointment_id, fetch=True)
 
     async def get_appointment_datas(self):
         sql = """
