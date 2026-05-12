@@ -6,7 +6,6 @@ env.read_env()
 BOT_TOKEN = env.str("BOT_TOKEN")
 ADMINS = env.list("ADMINS")
 IP = env.str("IP")
-ADMIN_GROUP = env.str("ADMIN_GROUP")
 REDIS_PASS = env.str("REDIS_PASS")
 
 DB_USER = env.str("DB_USER")

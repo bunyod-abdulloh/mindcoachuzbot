@@ -1,7 +1,10 @@
-from . import a_start
-from . import doctor_appointment
-from . import edit_datas
-from . import get_doctor
-from . import patient_scheduler
-from . import personal_cabinet
-from . import projects, projects_
+from . import ru_appointment
+from . import ru_lessons
+from . import ru_main
+from . import ru_main
+from . import ru_portret
+from . import start
+from . import uz_appointment
+from . import uz_lessons
+from . import uz_main
+from . import uz_portret
