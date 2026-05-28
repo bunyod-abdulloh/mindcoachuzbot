@@ -1,24 +1,6 @@
 UZ_TEXTS = {
-    # ============ START / LANGUAGE ============
-    "choose_language": "🌐 Tilni tanlang / Выберите язык",
-    "welcome": (
-        "👋 Salom, <b>{name}</b>!\n\n"
-        "Sportchilar uchun psixologik xizmat botiga xush kelibsiz.\n"
-        "Bu yerda siz quyidagi xizmatlardan foydalanishingiz mumkin:\n\n"
-        "🧠 Psixologik testlardan o'tish\n"
-        "📅 Psixolog qabuliga yozilish\n"
-        "📚 Psixologik tayyorgarlik darslari\n"
-        "👤 Psixologik portret"
-    ),
     "language_changed": "✅ Til muvaffaqiyatli o'zgartirildi",
-    "cancel_state": "✅ Jarayon bekor qilindi! ",
     "choose_action": "Quyidagi bo'limlardan birini tanlang:",
-
-    # ============ MAIN MENU BUTTONS ============
-    "menu_test": "🧠 Test ishlash",
-    "menu_appointment": "📅 Qabulga yozilish",
-    "menu_lessons": "📚 Psixologik tayyorgarlik darslari",
-    "menu_portret": "👤 Psixologik portret",
 
     # ============ COMMAND ============
     "menu_change_lang": "🌐 Tilni o'zgartirish",
@@ -26,21 +8,68 @@ UZ_TEXTS = {
     "blocked_user": "🚫 Hisobingiz vaqtincha bloklangan. Qo'llab-quvvatlash bilan bog'laning.",
     "commands": {
         "start": "Botni qayta ishga tushirish",
-        "lang": "Tilni o'zgartirish",
-        "cancel": "Joriy holatni bekor qilish"
-    },
-    "help_text": (
-        "ℹ️ <b>Yordam</b>\n\n"
-        "/start — Botni qayta ishga tushirish\n"
-        "/lang — Tilni o'zgartirish\n"
-        "/cancel — Joriy amalni bekor qilish\n"
-        "/help — Yordam"
-    ),
-
-    # ============ LESSONS ============
-    "lessons_list_title": "📚 <b>Psixologik tayyorgarlik darslari:</b>",
-    "no_lessons": "📭 Hozircha darslar mavjud emas. Tez orada qo'shiladi.",
-
-    # ============ CABINET (placeholder, asosan WebApp'da bo'ladi) ============
-    "cabinet_intro": "👤 Psixologik portret bo'limi",
+        "lang": "Tilni o'zgartirish"
+    }
 }
+
+EYSENCK_RESULTS_UZ = {
+    "title": "📊 **Sizning psixologik ko'rsatkichlaringiz:**\n\n",
+    "temperament_title": "🧠 **Temperament:**",
+    "lie_title": "📋 **Samimiylik shkalasi:**",
+    "stability_title": "🛡️ **Asab tizimi:**",
+    "extra_intro_title": "💬 **Ekstraversiya-introversiya:**",
+    "neuro_title": "⚡ **Neyrotizm:**",
+    "ball": "ball",
+
+    # Temperament tavsiflari
+    "choleric": "Xolerik \n(Kuchli, hissiy, tezkor reaksiyali)",
+    "sanguine": "Sangvinik \n(Faol, kirishimli, tez moslashuvchan)",
+    "melancholic": "Melanxolik \n(Sezgir, chuqur o‘ylovchi, ehtiyotkor)",
+    "phlegmatic": "Flegmatik \n(Vazmin, sabrli, barqaror xarakterli)",
+
+    # Ishonchlilik darajalari
+    "lie_low": "Samimiy\n(Javoblar samimiy va ishonchli)",
+    "lie_high": "Samimiy emas\n(Javoblarda qarama-qarshilik mavjud)",
+
+    # Barqarorlik
+    "stable": "Barqaror\n(Hissiyotlarini yaxshi nazorat qiladi)",
+    "unstable": "Barqaror emas\n(Hissiy o‘zgarishlarga moyil)",
+
+    # Ekstra-Intro tavsiflari
+    "introvert": "Introvert\n(Bosiq, ichki tahlilga moyil)",
+    "extravert": "Ekstravert\n(Ochiq, faol, jamoaviy)",
+    "ambivert": "Ambivert\n(Vaziyatga mos muloqot qiladi)",
+
+    # Nevrotizm darajalari
+    "level_low": "Past\n(Xotirjam va hissiy barqaror)",
+    "level_medium": "O'rta\n(Havotir va hissiy sezgirlik yuqori ba’zan bezovta qilishi mumkin)",
+    "level_high": "Yuqori\n(Havotir va hissiy sezgirlik yuqori)"
+}
+
+MILLMAN_RESULT_UZ = {
+    "emotional_resilience": "❤️ **Musobaqaga oid hissiy barqarorlik:**",
+    "self_regulation": "🎯 **O‘zini boshqarish:**",
+    "scale_motivation": "🚀 **Motivatsion quvvat sohasi:**",
+    "scale_resistance": "🧱 **To‘siqlarga barqaror bardoshlilik:**",
+    "q17": "🎭 **Emotsional reaksiyalar xarakteri:**",
+
+    "emotional_resilience_desc": "Bosimda o‘zini hissiy boshqara olish darajasi",
+    "self_regulation_desc": "Harakatlarini ongli nazorat qila olish darajasi",
+    "scale_motivation_desc": "Maqsad sari kuchli intilish darajasi",
+    "scale_resistance_desc": "Qiyinchilikda tushkunlikka tushish darajasi"
+}
+
+Q17_UZ = {
+    "neytral": "Neytral",
+    "stenik": "Stenik",
+    "astenik": "Astenik"
+}
+
+SAVOLNOMA_RESULT_UZ = {
+    "title": {"text": "🤝 Psixologik qo‘llab-quvvatlash zarurati: "},
+    "options": {True: "Mavjud",
+                False: "Mavjud emas"}
+}
+
+RESULT_WARNING_UZ = ("❓ **Mazkur test psixolog mutaxassis ishtirokida talqin etilishi zarur, aksi holda noto'g'ri "
+                     "tushunishga olib boradi.**")

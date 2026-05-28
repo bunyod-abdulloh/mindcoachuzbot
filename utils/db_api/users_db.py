@@ -10,6 +10,12 @@ class UsersDB:
         sql = "INSERT INTO bot_users (telegram_id) VALUES($1) ON CONFLICT (telegram_id) DO NOTHING"
         return await self.db.execute(sql, telegram_id, execute=True)
 
+    async def check_user(self, telegram_id):
+        sql = """
+            SELECT EXISTS (SELECT 1 FROM bot_users WHERE telegram_id = $1)
+            """
+        return await self.db.execute(sql, telegram_id, fetchval=True)
+
     async def set_language(self, language, telegram_id):
         sql = """
             UPDATE bot_users SET language = $1 WHERE telegram_id = $2

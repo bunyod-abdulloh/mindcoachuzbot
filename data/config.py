@@ -15,3 +15,7 @@ DB_HOST = env.str("DB_HOST")
 DB_PORT = env.str("DB_PORT")
 
 WEB_APP_URL = env.str("WEB_APP_URL")
+
+WEBHOOK_PATH = env.str("WEBHOOK_PATH")
+WEBAPP_HOST = env.str("WEBAPP_HOST")
+WEBAPP_PORT = env.int("WEBAPP_PORT")

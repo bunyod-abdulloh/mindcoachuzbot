@@ -7,6 +7,7 @@ from aiogram.types import ReplyKeyboardRemove
 from magic_filter import F
 
 from filters.admins import IsBotAdminFilter
+from handlers.private.start import handle_start
 from keyboards.default.admin_buttons import admin_main_btns
 from loader import dp, udb, adb
 from states.admin import AdminStates
@@ -22,7 +23,7 @@ async def admin_main_page(message: types.Message, state: FSMContext):
     await message.answer("Admin panel", reply_markup=admin_main_btns)
 
 
-@dp.message_handler(IsBotAdminFilter(), F.text == "Foydalanuvchilar soni")
+@dp.message_handler(IsBotAdminFilter(), F.text == "🏃 Foydalanuvchilar soni")
 async def user_count(message: types.Message):
     count = await udb.count_users()
     await message.answer(f"Foydalanuvchilar soni: {count}")
@@ -85,3 +86,8 @@ async def send_media_to_bot_second(message: types.Message, album: List[types.Mes
         f"Media {success_count} ta foydalanuvchiga yuborildi!\n{failed_count} ta foydalanuvchi botni bloklagan."
     )
 
+
+@dp.message_handler(IsBotAdminFilter(), F.text == "🏡 Bosh sahifa", state="*")
+async def hmain_page(message: types.Message, state: FSMContext):
+    await state.finish()
+    await handle_start(message, state)
