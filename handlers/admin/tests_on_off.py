@@ -33,13 +33,14 @@ async def hon_off_process(call: types.CallbackQuery, state: FSMContext, callback
 
     if value == "on":
         await appdb.on_off_tests(value=True)
-        await call.answer(
-            text="Testlar yoqildi!"
+        await call.message.edit_text(
+            text="Testlar yoqildi!",
+            reply_markup=None
         )
     elif value == "off":
         await appdb.on_off_tests(value=True)
-        await call.answer(
-            text="Testlar o'chirildi!"
+        await call.message.edit_text(
+            text="Testlar o'chirildi!", reply_markup=None
         )
     else:
         await call.message.edit_text(
