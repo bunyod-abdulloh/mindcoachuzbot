@@ -136,7 +136,7 @@ class AppDB:
 
     async def off_tests(self):
         sql = """
-            UPDATE core_test SET is_active = True
+            UPDATE core_test SET is_active = False
             """
         result = await self.db.execute(sql, execute=True)
 
