@@ -2,7 +2,7 @@ from math import ceil
 
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from keyboards.inline.callback_data import user_select_cb, users_page_cb, select_type_cb
+from keyboards.inline.callback_data import user_select_cb, users_page_cb, select_type_cb, on_off_cb
 from loader import appdb
 
 
@@ -77,6 +77,30 @@ async def users_pagination_ikb(page: int = 1) -> InlineKeyboardMarkup:
     kb.add(
         InlineKeyboardButton(
             text="◀️ Ortga", callback_data="admin_back_search"
+        )
+    )
+    return kb
+
+
+def on_off_buttons():
+    kb = InlineKeyboardMarkup()
+    kb.add(
+        InlineKeyboardButton(
+            text="Yoqish", callback_data=on_off_cb.new(
+                action="on_off", value="on"
+            )
+        ),
+        InlineKeyboardButton(
+            text="O'chirish", callback_data=on_off_cb.new(
+                action="on_off", value="off"
+            )
+        )
+    )
+    kb.add(
+        InlineKeyboardButton(
+            text="◀️ Ortga", callback_data=on_off_cb.new(
+                action="on_off", value="back"
+            )
         )
     )
     return kb

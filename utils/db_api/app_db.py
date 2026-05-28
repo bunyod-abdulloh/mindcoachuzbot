@@ -136,3 +136,9 @@ class AppDB:
             UPDATE core_test SET is_active = $1
             """
         await self.db.execute(sql, value, execute=True)
+
+    async def check_test_status(self):
+        sql = """
+            SELECT code, is_active FROM core_test 
+            """
+        return await self.db.execute(sql, fetch=True)
