@@ -132,7 +132,7 @@ class AppDB:
     async def on_tests(self):
         sql = "UPDATE core_test SET is_active = TRUE"
 
-        result = await self.db.execute(sql)
+        result = await self.db.execute(sql, execute=True)
 
         print(result)
 
