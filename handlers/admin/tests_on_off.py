@@ -17,7 +17,11 @@ async def hon_off_start(message: types.Message, state: FSMContext):
     test_str = "Testlar holati\n\n"
 
     for test in tests:
-        test_str += f"{test['code']} | {test['is_active']}\n"
+        if test['is_active'] is True:
+            is_active = "Yoqilgan"
+        else:
+            is_active = "O'chirilgan"
+        test_str += f"{test['code']} | {is_active}\n"
 
     await message.answer(
         text=test_str,
