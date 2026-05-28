@@ -125,17 +125,21 @@ class AppDB:
             GROUP BY
                 uu.id,
                 pa.id
-
             ORDER BY uu.id
         """
-
         return await self.db.execute(sql, fetch=True)
 
-    async def on_off_tests(self, value):
+    async def on_tests(self):
         sql = """
-            UPDATE core_test SET is_active = $1
+            UPDATE core_test SET is_active = True
             """
-        await self.db.execute(sql, value, execute=True)
+        await self.db.execute(sql, execute=True)
+
+    async def off_tests(self):
+        sql = """
+            UPDATE core_test SET is_active = True
+            """
+        await self.db.execute(sql, execute=True)
 
     async def check_test_status(self):
         sql = """
