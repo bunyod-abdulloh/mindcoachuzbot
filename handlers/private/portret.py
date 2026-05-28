@@ -74,9 +74,10 @@ async def handle_portret_main(event: types.CallbackQuery | types.Message, callba
         test_type="4savollar",
         user_id=user["user_id"]
     )
-    response_text += savollar_result(
-        result=savolnoma_results, lang=lang_code
-    )
+    if savolnoma_results:
+        response_text += savollar_result(
+            result=savolnoma_results, lang=lang_code
+        )
 
     text = (
         personal_datas_uz(data=user, response_text=response_text)
