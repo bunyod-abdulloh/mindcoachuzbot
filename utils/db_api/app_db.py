@@ -130,3 +130,9 @@ class AppDB:
         """
 
         return await self.db.execute(sql, fetch=True)
+
+    async def on_off_tests(self, value):
+        sql = """
+            UPDATE core_test SET is_active = $1
+            """
+        await self.db.execute(sql, value, execute=True)
