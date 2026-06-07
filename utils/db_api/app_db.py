@@ -145,3 +145,40 @@ class AppDB:
             SELECT code, is_active FROM core_test 
             """
         return await self.db.execute(sql, fetch=True)
+
+    async def blacklisted_count(self):
+        sql = """
+            SELECT COUNT(*) 
+            FROM token_blacklist_blacklistedtoken b
+            JOIN token_blacklist_outstandingtoken o ON b.token_id = o.id
+            WHERE o.expires_at < NOW()
+            """
+        return await self.db.execute(sql, fetchval=True)
+
+    async def outstanding_count(self):
+        sql = """
+            SELECT COUNT(*)
+            FROM token_blacklist_outstandingtoken
+            WHERE expires_at < NOW()
+              AND id NOT IN (
+                SELECT token_id FROM token_blacklist_blacklistedtoken
+              )
+            """
+        return await self.db.execute(sql, fetchval=True)
+
+    async def delete_blacklisted_tokens(self):
+        sql = """
+                DELETE FROM token_blacklist_blacklistedtoken
+                WHERE token_id IN (
+                SELECT id FROM token_blacklist_outstandingtoken
+                WHERE expires_at < NOW()
+            )
+            """
+        await self.db.execute(sql, execute=True)
+
+    async def delete_outstanding_tokens(self):
+        sql = """
+            DELETE FROM token_blacklist_outstandingtoken
+            WHERE expires_at < NOW()
+            """
+        await self.db.execute(sql, execute=True)
