@@ -114,12 +114,14 @@ def admin_support_ikb(telegram_id):
             text="Rad etish",
             callback_data=admin_support_cb.new(
                 action="cancel", value=telegram_id
-            ))
-    ),
-    InlineKeyboardButton(
-        text="Javob berish",
-        callback_data=admin_support_cb.new(
-            action="answer", value=telegram_id
+            ),
+        ),
+        InlineKeyboardButton(
+            text="Javob berish",
+            callback_data=admin_support_cb.new(
+                action="answer", value=telegram_id
+            )
         )
     )
+
     return kb
