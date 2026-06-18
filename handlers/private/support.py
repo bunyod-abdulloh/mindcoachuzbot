@@ -27,7 +27,7 @@ async def h_support_main(call: types.CallbackQuery, state: FSMContext, callback_
 
 @dp.message_handler(state="user_support", content_types=['text'])
 async def h_support_process(message: types.Message, state: FSMContext):
-    text = message.text
+    text = f"Xabar matni:\n\n{message.text}"
     telegram_id = int(message.from_user.id)
 
     athlete = await appdb.check_athlete(telegram_id=telegram_id)
@@ -53,7 +53,7 @@ async def h_support_process(message: types.Message, state: FSMContext):
     # sleep yo'q, to'g'ridan-to'g'ri send yo'q — faqat navbatga qo'yamiz
     await send_to_admin(
         chat_id=ADMINS[1],
-        text=f"Foydalanuvchidan xabar qabul qilindi!\n\nXabar matni:\n\n{result_text}",
+        text=f"Foydalanuvchidan xabar qabul qilindi!\n\n{result_text}",
         reply_markup=admin_support_ikb(telegram_id=telegram_id),
     )
 
