@@ -1,8 +1,9 @@
+from distutils.command.install import value
 from math import ceil
 
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from keyboards.inline.callback_data import user_select_cb, users_page_cb, select_type_cb, on_off_cb
+from keyboards.inline.callback_data import user_select_cb, users_page_cb, select_type_cb, on_off_cb, admin_support_cb
 from loader import appdb
 
 
@@ -101,6 +102,24 @@ def on_off_buttons():
             text="◀️ Ortga", callback_data=on_off_cb.new(
                 action="on_off", value="back"
             )
+        )
+    )
+    return kb
+
+
+def admin_support_ikb(telegram_id):
+    kb = InlineKeyboardMarkup()
+    kb.add(
+        InlineKeyboardButton(
+            text="Rad etish",
+            callback_data=admin_support_cb.new(
+                action="cancel", value=telegram_id
+            ))
+    ),
+    InlineKeyboardButton(
+        text="Javob berish",
+        callback_data=admin_support_cb.new(
+            action="answer", value=telegram_id
         )
     )
     return kb

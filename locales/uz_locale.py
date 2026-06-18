@@ -73,3 +73,4 @@ SAVOLNOMA_RESULT_UZ = {
 
 RESULT_WARNING_UZ = ("❓ **Mazkur test psixolog mutaxassis ishtirokida talqin etilishi zarur, aksi holda noto'g'ri "
                      "tushunishga olib boradi.**")
+

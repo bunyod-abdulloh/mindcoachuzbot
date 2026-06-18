@@ -67,3 +67,28 @@ RESULT_ALERT = {
     "uz": "⏳ Natija tayyorlanmoqda...",
     "ru": "⏳ Результат подготавливается..."
 }
+
+USER_SUPPORT = {
+    "uz": {
+        "alert": (
+            "📨 Ushbu bo‘lim orqali Siz bot adminiga xabar yuborishingiz mumkin.\n\n"
+            "✍️ Xabaringizni kiriting.\n\n"
+            "⚠️ Faqat matnli xabarlar qabul qilinadi!"
+        ),
+        "success": (
+            "✅ Xabaringiz muvaffaqiyatli yuborildi!\n\n"
+            "⏳ Tez orada javob berishga harakat qilamiz."
+        )
+    },
+    "ru": {
+        "alert": (
+            "📨 В этом разделе Вы можете отправить сообщение администратору бота.\n\n"
+            "✍️ Введите Ваше сообщение.\n\n"
+            "⚠️ Принимаются только текстовые сообщения!"
+        ),
+        "success": (
+            "✅ Ваше сообщение успешно отправлено!\n\n"
+            "⏳ Мы постараемся ответить Вам в ближайшее время."
+        )
+    }
+}

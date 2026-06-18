@@ -59,37 +59,6 @@ class AppDB:
         """
         return await self.db.execute(query, limit, offset, fetch=True)
 
-    # async def add_demo_athlets(self, telegram_id: int, phone_number: str, password: str, email: str):
-    #     sql = """
-    #         INSERT INTO users_user (
-    #         telegram_id,
-    #         phone_number,
-    #         password,
-    #         is_superuser,
-    #         email,
-    #         is_staff,
-    #         is_active,
-    #         date_joined)
-    #         VALUES (
-    #         $1, $2, $3, False, $4, False, False, now() AT TIME ZONE 'UTC'
-    #         )
-    #         """
-    #     await self.db.execute(sql, telegram_id, phone_number, password, email, execute=True)
-    #
-    # async def add_demo_profile(self, user_id):
-    #     sql = """
-    #         INSERT INTO profiles_athleteprofile(
-    #         sport_type,
-    #         sport_experience_years,
-    #         hobbies,
-    #         is_completed,
-    #         created_at,
-    #         updated_at,
-    #         user_id)
-    #         VALUES ('Boks', 10, 'Not', True, now(), now(), $1)
-    #     """
-    #     await self.db.execute(sql, user_id, execute=True)
-
     async def get_athlete_by_phone(self, phone_number: str):
         sql = """
             SELECT telegram_id FROM users_user WHERE phone_number = $1 AND telegram_id IS NOT NULL

@@ -1,7 +1,7 @@
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
 
 from data.config import WEB_APP_URL
-from keyboards.inline.callback_data import back_cb, language_cb, appointment_cb, lessons_cb, profile_cb
+from keyboards.inline.callback_data import back_cb, language_cb, appointment_cb, lessons_cb, profile_cb, user_support_cb
 
 
 def language_ikb():
@@ -28,12 +28,14 @@ def main_ikb(lang: str) -> InlineKeyboardMarkup:
             "appointment": "📅 Qabulga yozilish",
             "lessons": "📚 Psixologik tayyorgarlik darslari",
             "portrait": "👤 Psixologik portret",
+            "support": "🤖 Botga yozish"
         },
         "ru": {
             "test": "🧠 Пройти тест",
             "appointment": "📅 Записаться на прием",
             "lessons": "📚 Занятия по психологической подготовке",
             "portrait": "👤 Психологический портрет",
+            "support": "🤖 Написать в бот",
         }
     }
 
@@ -57,6 +59,11 @@ def main_ikb(lang: str) -> InlineKeyboardMarkup:
             text=current["portrait"],
             callback_data=profile_cb.new(action="portrait", lang=lang)
         ),
+        InlineKeyboardButton(
+            text=current['support'], callback_data=user_support_cb.new(
+                action="support", lang=lang
+            )
+        )
     )
     return kb
 
