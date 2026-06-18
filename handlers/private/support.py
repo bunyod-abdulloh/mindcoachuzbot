@@ -5,7 +5,7 @@ from data.config import ADMINS
 from keyboards.inline.admin import admin_support_ikb
 from keyboards.inline.base import back_ikb
 from keyboards.inline.callback_data import user_support_cb
-from loader import dp, appdb
+from loader import dp, appdb, udb
 from locales.core import USER_SUPPORT
 from services.admin_sender import send_to_admin
 
@@ -44,8 +44,11 @@ async def h_support_process(message: types.Message, state: FSMContext):
     else:
         result_text = text
 
+    lang = await udb.get_language(
+        telegram_id=telegram_id
+    )
     # Foydalanuvchiga darrov javob
-    await message.answer(text=USER_SUPPORT['success'])
+    await message.answer(text=USER_SUPPORT[lang]['success'])
 
     # sleep yo'q, to'g'ridan-to'g'ri send yo'q — faqat navbatga qo'yamiz
     await send_to_admin(
