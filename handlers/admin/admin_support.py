@@ -41,7 +41,7 @@ async def h_adm_support_answer(call: types.CallbackQuery, state: FSMContext, cal
 async def adm_support_answer_process(message: types.Message, state: FSMContext):
     data = await state.get_data()
     telegram_id = data.get("value")
-
+    print(f"BU TELEGRAM_ID: {telegram_id}")
     admin_text = (
         "Bot admini xabaringizga javob berdi / "
         "Администратор бота ответил на ваше сообщение\n\n"
