@@ -40,7 +40,7 @@ async def h_adm_support_answer(call: types.CallbackQuery, state: FSMContext, cal
 @dp.message_handler(state="adm_support_answer", content_types=['text', 'voice'])
 async def adm_support_answer_process(message: types.Message, state: FSMContext):
     data = await state.get_data()
-    telegram_id = data.get("telegram_id")
+    telegram_id = data.get("value")
 
     admin_text = (
         "Bot admini xabaringizga javob berdi / "
