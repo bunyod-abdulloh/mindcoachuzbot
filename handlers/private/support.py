@@ -1,3 +1,5 @@
+import asyncio
+
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 
@@ -51,6 +53,12 @@ async def h_support_process(message: types.Message, state: FSMContext):
     elif not athlete:
         result_text = text
 
+    await message.answer(
+        text=USER_SUPPORT['success']
+    )
+
+    await asyncio.sleep(1)
+
     await bot.send_message(
         chat_id=ADMINS[1],
         text=f"Foydalanuvchidan xabar qabul qilindi!\n\n"
@@ -60,7 +68,4 @@ async def h_support_process(message: types.Message, state: FSMContext):
         )
     )
 
-    await message.answer(
-        text=USER_SUPPORT['success']
-    )
     await state.finish()

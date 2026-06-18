@@ -1,3 +1,5 @@
+import asyncio
+
 import aiogram
 from aiogram import types
 from aiogram.dispatcher import FSMContext
@@ -53,6 +55,8 @@ async def adm_support_answer_process(message: types.Message, state: FSMContext):
                 voice=message.voice.file_id,
                 caption=admin_text
             )
+
+        await asyncio.sleep(1)
 
         await message.answer(
             text="Xabar foydalanuvchiga yuborildi!"
