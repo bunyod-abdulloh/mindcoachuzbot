@@ -13,10 +13,11 @@ WEBHOOK_URL = f"{WEB_APP_URL}{WEBHOOK_PATH}"
 
 
 async def on_startup(dispatcher):
+    asyncio.create_task(admin_sender_worker())
+
     try:
         await on_startup_notify(dispatcher)
         print("✅ Notify done")
-        asyncio.create_task(admin_sender_worker())
     except Exception as e:
         print(f"❌ Notify error: {e}")
 
