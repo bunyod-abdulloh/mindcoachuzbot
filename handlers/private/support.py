@@ -1,5 +1,3 @@
-import asyncio
-
 from aiogram import types
 from aiogram.dispatcher import FSMContext
 
@@ -7,8 +5,9 @@ from data.config import ADMINS
 from keyboards.inline.admin import admin_support_ikb
 from keyboards.inline.base import back_ikb
 from keyboards.inline.callback_data import user_support_cb
-from loader import dp, bot, appdb
+from loader import dp, appdb
 from locales.core import USER_SUPPORT
+from services.admin_sender import send_to_admin
 
 
 @dp.callback_query_handler(user_support_cb.filter(), state="*")
@@ -31,41 +30,28 @@ async def h_support_process(message: types.Message, state: FSMContext):
     text = message.text
     telegram_id = int(message.from_user.id)
 
-    athlete = await appdb.check_athlete(
-        telegram_id=telegram_id
-    )
-
-    result_text = str()
+    athlete = await appdb.check_athlete(telegram_id=telegram_id)
 
     if athlete:
         user = await appdb.get_athlete_full(telegram_id=telegram_id)
-
-        user_data = (
+        result_text = (
             f"Ism sharif: {user['full_name']}\n"
-            f"Tel raqam: {user['phonr_number']}\n"
+            f"Tel raqam: {user['phone_number']}\n"  # 'phonr_number' xatosi tuzatildi
             f"Sport turi: {user['sport_type']}\n"
             f"Tajriba: {user['sport_years']}\n"
             f"Qiziqishlar: {user['hobbies']}\n\n"
-        )
-
-        result_text = user_data + text
-
-    elif not athlete:
+                      ) + text
+    else:
         result_text = text
 
-    await message.answer(
-        text=USER_SUPPORT['success']
-    )
+    # Foydalanuvchiga darrov javob
+    await message.answer(text=USER_SUPPORT['success'])
 
-    await asyncio.sleep(1)
-
-    await bot.send_message(
+    # sleep yo'q, to'g'ridan-to'g'ri send yo'q — faqat navbatga qo'yamiz
+    await send_to_admin(
         chat_id=ADMINS[1],
-        text=f"Foydalanuvchidan xabar qabul qilindi!\n\n"
-             f"{result_text}",
-        reply_markup=admin_support_ikb(
-            telegram_id=telegram_id
-        )
+        text=f"Foydalanuvchidan xabar qabul qilindi!\n\n{result_text}",
+        reply_markup=admin_support_ikb(telegram_id=telegram_id),
     )
 
     await state.finish()

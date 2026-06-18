@@ -1,9 +1,12 @@
+import asyncio
+
 import middlewares, filters, handlers
 
 from aiogram import executor
 
 from data.config import WEB_APP_URL, WEBHOOK_PATH, WEBAPP_HOST, WEBAPP_PORT
 from loader import dp, bot, db
+from services.admin_sender import admin_sender_worker
 from utils.notify_admins import on_startup_notify
 
 WEBHOOK_URL = f"{WEB_APP_URL}{WEBHOOK_PATH}"
@@ -13,6 +16,7 @@ async def on_startup(dispatcher):
     try:
         await on_startup_notify(dispatcher)
         print("✅ Notify done")
+        asyncio.create_task(admin_sender_worker())
     except Exception as e:
         print(f"❌ Notify error: {e}")
 
