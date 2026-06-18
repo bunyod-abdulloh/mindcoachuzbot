@@ -28,7 +28,7 @@ async def h_admin_support_cancel(call: types.CallbackQuery, state: FSMContext):
 
 @dp.callback_query_handler(admin_support_cb.filter(action="answer"), state="*")
 async def h_adm_support_answer(call: types.CallbackQuery, state: FSMContext, callback_data: dict):
-    telegram_id = callback_data.get("telegram_id")
+    telegram_id = callback_data.get("value")
 
     await call.message.edit_text(
         text="Xabaringizni kiriting\n\nMatnli va ovozli xabar yuborsangiz bo'ladi"
@@ -40,7 +40,7 @@ async def h_adm_support_answer(call: types.CallbackQuery, state: FSMContext, cal
 @dp.message_handler(state="adm_support_answer", content_types=['text', 'voice'])
 async def adm_support_answer_process(message: types.Message, state: FSMContext):
     data = await state.get_data()
-    telegram_id = data.get("value")
+    telegram_id = data.get("telegram_id")
     print(f"BU TELEGRAM_ID: {telegram_id}")
     admin_text = (
         "Bot admini xabaringizga javob berdi / "
