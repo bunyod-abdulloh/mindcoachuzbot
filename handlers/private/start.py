@@ -43,8 +43,9 @@ async def handle_lang(message: types.Message, state: FSMContext):
     )
 
 
-@dp.callback_query_handler(back_cb.filter(page="main"))
-async def back_main_handler(call: types.CallbackQuery, callback_data: dict):
+@dp.callback_query_handler(back_cb.filter(page="main"), state="*")
+async def back_main_handler(call: types.CallbackQuery, callback_data: dict, state: FSMContext):
+    await state.finish()
     lang = callback_data["lang"]
 
     text = "Главное меню" if lang == "ru" else "Asosiy menyu"
